@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11' # Change this to your required Java version
+
+      - name: Build
+        run: ./gradlew assemble
+
+      - name: Test
+        run: ./gradlew test
+
+      - name: Archive test results
+        if: always()
+        run: |
+          mkdir -p test-results
+          cp -r build/test-results/test test-results/
