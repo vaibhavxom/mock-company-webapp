@@ -2,7 +2,7 @@ name: CI/CD
 
 on:
   push:
-    branches: [ "main", "develop", "feature/*" ] # Run on pushes to any branch
+    branches: [ "master", "develop", "feature/*" ] # Run on pushes to any branch
 
 jobs:
   build-and-test:
